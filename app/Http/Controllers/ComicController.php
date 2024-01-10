@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use Illuminate\Http\Request;
-
-//use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
 class ComicController extends Controller
 {
@@ -40,7 +40,7 @@ class ComicController extends Controller
     public function store(Request $request)
     {
 
-        $formData = $request->all();
+        $formData = $this->validation($request->all());
         $newComic = new Comic();
         $newComic->fill($formData);
         $newComic->sale_date = '2024-08-01';
@@ -82,7 +82,8 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        $formData = $request->all();
+
+        $formData = $this->validation($request->all());
         $comic->fill($formData);
         $comic->sale_date = '2024-08-01';
         $comic->series = 'random';
@@ -104,5 +105,27 @@ class ComicController extends Controller
         $comic->delete();
         return to_route('comics.index')->with('message', "Il prodotto $comic->title è stato eliminato");
 
+    }
+
+    /**
+     * validation
+     */
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'title' => 'required|min:3',
+                'price' => 'required',
+                'thumb' => 'url'
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.min' => 'Il titolo deve essere di almeno :min caratteri',
+                'price.required' => 'Il prezzo è richiesto',
+                'thumb.url' => 'L\'immagine deve contere un url valido'
+            ]
+        )->validate();
+        return $validator;
     }
 }
