@@ -23,7 +23,7 @@ class ComicController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View;
      */
     public function create()
     {
@@ -39,6 +39,7 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
         $formData = $request->all();
         $newComic = new Comic();
         $newComic->title = $formData['title'];
@@ -47,8 +48,10 @@ class ComicController extends Controller
         $newComic->sale_date = '2024-08-01';
         $newComic->series = 'random';
         $newComic->type = $formData['type'];
+        $newComic->thumb = $formData['thumb'];
+
         $newComic->save();
-        return to_route('comics.index');
+        return to_route('comics.show', $newComic->id);
     }
 
     /**
@@ -66,11 +69,11 @@ class ComicController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Comic  $comic
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**

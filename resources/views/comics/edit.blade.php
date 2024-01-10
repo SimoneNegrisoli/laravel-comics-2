@@ -11,12 +11,13 @@
                     <div class="pt-5 mx-3">
                         <a href="{{ route('comics.index') }}" class="btn btn-info  ">Torna ai fumetti</a>
                     </div>
-                    <form action="{{ route('comics.store') }}" method="POST" class="pt-5">
+                    <form action="{{ route('comics.update', $comic->id) }}" method="POST" class="pt-5">
                         {{-- token di sicurezza che conterra la mia key per garantire che quello che invio è generato dalla mia pagina --}}
                         @csrf
+                        @method('PUT')
                         <div class="mb-3 mx-3">
                             <label for="title" class="form-label">Titolo:</label>
-                            <input type="text" value="{{ old('title') }}"
+                            <input type="text" value="{{ $comic->title }}"
                                 class="form-control @error('title') is-invalid @enderror" id="title" name="title"
                                 placeholder="Inserisci titolo" required>
 

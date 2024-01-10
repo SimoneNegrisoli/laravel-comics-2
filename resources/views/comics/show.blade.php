@@ -6,7 +6,12 @@
 @section('content')
     <main>
         <section class="container" id="comics-show">
-            <h1>{{ $comic->title }}</h1>
+            <div class="d-flex justify-content-between align-items-center ">
+                <h1>{{ $comic->title }}</h1>
+
+                <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-link ">Modifica prodotto</a>
+
+            </div>
             <div class="row gy-4">
 
                 <div class="col-12">
