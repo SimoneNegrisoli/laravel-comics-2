@@ -42,13 +42,10 @@ class ComicController extends Controller
 
         $formData = $request->all();
         $newComic = new Comic();
-        $newComic->title = $formData['title'];
-        $newComic->description = $formData['description'];
-        $newComic->price = $formData['price'];
+        $newComic->fill($formData);
         $newComic->sale_date = '2024-08-01';
         $newComic->series = 'random';
-        $newComic->type = $formData['type'];
-        $newComic->thumb = $formData['thumb'];
+
 
         $newComic->save();
         return to_route('comics.show', $newComic->id);
@@ -86,13 +83,10 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
     {
         $formData = $request->all();
-        $comic->title = $formData['title'];
-        $comic->description = $formData['description'];
-        $comic->price = $formData['price'];
+        $comic->fill($formData);
         $comic->sale_date = '2024-08-01';
         $comic->series = 'random';
-        $comic->type = $formData['type'];
-        $comic->thumb = $formData['thumb'];
+
         $comic->update();
         return to_route('comics.show', $comic->id);
 
