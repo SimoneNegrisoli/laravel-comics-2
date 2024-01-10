@@ -24,7 +24,7 @@
                             <div class="card-text mt-3 ">{!! $comic->description !!}</div>
                         </div>
                     </div>
-                    <a href="{{ route('home') }}" class="btn btn-primary ">Torna ai fumetti</a>
+                    <a href="{{ route('comics.index') }}" class="btn btn-primary ">Torna ai fumetti</a>
                 </div>
 
 
