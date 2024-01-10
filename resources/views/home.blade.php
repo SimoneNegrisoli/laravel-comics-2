@@ -6,28 +6,23 @@
 @section('content')
     <main>
         <section class=" container ">
-            <h1>Comics</h1>
+            <h1>Most popular</h1>
             <div class="row">
-                @foreach ($comics as $key => $comic)
-                    <div class="col-12 col-md-2 mt-5 mb-5">
-                        <div class=" thecard  ">
-                            <div class="mycard-c">
-                                <img src="{{ $comic['thumb'] }}" class="card-img-top" alt="{{ $comic['title'] }}">
-                            </div>
-                            <div class=" mt-2 d-flex flex-column justify-content-between ">
-                                <div>
-                                    <h5>{{ $comic['title'] }}</h5>
-
-                                </div>
-                                <div>
-                                    <a href="{{ route('comics.show', $key) }}" class="mybtn">Scopri</a>
+                <div class="col">
+                    <div class="d-flex justify-content-between  ">
+                        @foreach ($comics as $comic)
+                            <div class="mycomic-home">
+                                <h6>{{ $comic->title }}</h6>
+                                <div class="my-img-c">
+                                    <img src="{{ $comic->thumb }}" alt="{{ $comic->title }}">
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
 
+
+                </div>
+            </div>
         </section>
     </main>
 @endsection
