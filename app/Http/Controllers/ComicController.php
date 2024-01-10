@@ -81,21 +81,32 @@ class ComicController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Comic  $comic
-     * @return \Illuminate\Http\Response
+     *
      */
     public function update(Request $request, Comic $comic)
     {
-        //
+        $formData = $request->all();
+        $comic->title = $formData['title'];
+        $comic->description = $formData['description'];
+        $comic->price = $formData['price'];
+        $comic->sale_date = '2024-08-01';
+        $comic->series = 'random';
+        $comic->type = $formData['type'];
+        $comic->thumb = $formData['thumb'];
+        $comic->update();
+        return to_route('comics.show', $comic->id);
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Comic  $comic
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
     }
 }
