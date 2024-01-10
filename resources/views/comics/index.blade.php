@@ -12,6 +12,9 @@
                     <a href="{{ route('comics.create') }}" class="btn btn-success ">Aggiungi Fumetto</a>
                 </div>
             </div>
+            @if (session()->has('message'))
+                <div class="alert alert-success ">{{ session('message') }}</div>
+            @endif
             <div class="row">
                 @foreach ($comics as $comic)
                     <div class="col-12 col-md-2 mt-5 mb-5">
